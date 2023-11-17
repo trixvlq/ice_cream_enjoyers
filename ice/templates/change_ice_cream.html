@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Изменения в мороженом{% endblock %}
+{% block content %}
+    <div class="container">
+    <h2>Изменить {{ icecream.title }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row" style = "height:50vh;">
+            <div class="col d-flex flex-column ">
+                <p>{{ form.title }}</p>
+                <p>{{ form.description }}</p>
+                <p>{{ form.price }}</p>
+                {{ form.category }}
+            </div>
+            <div class="col d-flex flex-column ">
+                <img src="{{ icecream.image.url }}" style = 'width:50%;height:50%' alt="{{ icecream.title }}">
+                {{ form.image }}
+            </div>
+        </div>
+        <button class = "btn btn-primary" type="submit">Изменить</button>
+    </form>
+    </div>
+{% endblock %}

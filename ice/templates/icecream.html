@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="{{ icecream.image.url }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
+                 height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{icecream.title}}</h1>
+            <p class="lead">{{icecream.get_description}}</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{% url 'favorite' icecream.slug %}">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Добавить в любимые</button>
+                </a>
+                <a href="{% url 'home' %}">
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Назад</button>
+                </a>
+                {% if creator %}
+                    <a href="{% url 'edit' icecream.slug%}">
+                        <button type="button" class="btn btn-outline-warning btn-lg px-4">Изменить</button>
+                    </a>
+                    <a href="{% url 'delete' icecream.slug%}">
+                        <button type="button" class="btn btn-outline-danger btn-lg px-4">Удалить</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

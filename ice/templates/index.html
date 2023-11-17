@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{title}}{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>{% block set %}{{set}}{% endblock %}</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for ice in icecreams %}
+        <div class="col">
+            <div class="row">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ ice.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <small class="text-secondary">{{ ice.category.title }}</small>
+                        <p class="card-text">{{ice.get_description}}</p>
+                        <a href="{{ice.get_absolute_url}}" style='text-decoration:none;color: #000;'>
+                            <button class="button">Читать</button>
+                        </a>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body">{{ice.price}} теньге</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

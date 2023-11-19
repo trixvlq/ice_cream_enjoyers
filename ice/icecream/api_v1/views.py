@@ -1,19 +1,21 @@
 from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from .permissions import IsOwnerOrReadOnly
 from ..models import *
 from .serializers import *
-
+from .pagination import *
 
 class IceCreamApiList(generics.ListAPIView):
     queryset = IceCream.objects.all()
     serializer_class = IceCreamSerializer
-
+    pagination_class = PaginationAPIView
 
 class IceCreamUpdate(generics.RetrieveUpdateAPIView):
     serializer_class = IceCreamSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (TokenAuthentication,)
 
     def get_queryset(self):
         return IceCream.objects.all()
